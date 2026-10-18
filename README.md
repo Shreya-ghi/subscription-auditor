@@ -1,6 +1,6 @@
 # Smart Subscription & Recurring Expense Auditor
 
-A web application to track recurring subscriptions, calculate monthly and yearly expenses, monitor upcoming renewals, and identify potential savings.
+A web application to track recurring subscriptions, calculate expenses, monitor upcoming renewals, and identify potential savings.
 
 ## Technology Stack
 - Frontend: React + Vite
@@ -8,5 +8,19 @@ A web application to track recurring subscriptions, calculate monthly and yearly
 - Database: SQLite
 - Charts: Recharts
 
-## Status
-Development in progress.
+## Current Status
+- Frontend dashboard implemented.
+- Subscription data and preferences persist in browser localStorage.
+- Backend development is planned.
+- Git version control is configured.
+
+## Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Development
+Backend integration, automated tests, and DevOps pipeline setup will be documented as they are implemented and verified.
