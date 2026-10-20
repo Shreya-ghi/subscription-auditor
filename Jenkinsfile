@@ -10,7 +10,7 @@ pipeline {
 
         stage('Backend Tests') {
             steps {
-                bat 'python -m pytest backend\\tests -v'
+                bat '"D:\\projects\\subscription-auditor\\.venv\\Scripts\\python.exe" -m pytest backend\\tests -v'
             }
         }
 
