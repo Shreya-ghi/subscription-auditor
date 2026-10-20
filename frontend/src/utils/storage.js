@@ -1,68 +1,8 @@
-import { INITIAL_SUBSCRIPTIONS } from './mockData.js'
-
-const STORAGE_KEY = 'smart_subscription_auditor_data_v1'
 const PREFS_KEY = 'smart_subscription_auditor_prefs_v1'
+const META_KEY = 'smart_subscription_auditor_meta_v1'
 
 /**
- * Loads subscriptions from localStorage.
- * Only falls back to INITIAL_SUBSCRIPTIONS on first run or parse failure.
- * If user legitimately cleared all subscriptions, an empty array is preserved!
- */
-export function loadSubscriptions() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw === null) {
-      saveSubscriptions(INITIAL_SUBSCRIPTIONS)
-      return INITIAL_SUBSCRIPTIONS
-    }
-    const parsed = JSON.parse(raw)
-    if (Array.isArray(parsed)) {
-      return parsed
-    }
-    return INITIAL_SUBSCRIPTIONS
-  } catch (err) {
-    console.warn('Failed to load subscriptions from localStorage. Using defaults.', err)
-    return INITIAL_SUBSCRIPTIONS
-  }
-}
-
-/**
- * Persists subscriptions list to localStorage.
- */
-export function saveSubscriptions(subscriptions) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(subscriptions))
-  } catch (err) {
-    console.error('Failed to save subscriptions to localStorage.', err)
-  }
-}
-
-/**
- * Resets data to initial demo subscriptions.
- */
-export function resetToDemoData() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_SUBSCRIPTIONS))
-  } catch (err) {
-    console.error('Failed to reset demo data', err)
-  }
-  return INITIAL_SUBSCRIPTIONS
-}
-
-/**
- * Clears all subscriptions and keeps empty state persisted.
- */
-export function clearAllSubscriptions() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([]))
-  } catch (err) {
-    console.error('Failed to clear data', err)
-  }
-  return []
-}
-
-/**
- * Loads user preferences (currency, renewal alert window).
+ * Loads user preferences (currency, renewal alert window threshold).
  */
 export function loadPreferences() {
   const defaults = { currency: '$', renewalThreshold: 7 }
@@ -84,5 +24,54 @@ export function savePreferences(prefs) {
     localStorage.setItem(PREFS_KEY, JSON.stringify(prefs))
   } catch (err) {
     console.error('Failed to save preferences to localStorage.', err)
+  }
+}
+
+/**
+ * Loads client-side subscription metadata (status, notes, paymentMethod, usageFrequency)
+ * keyed by backend subscription ID.
+ */
+export function loadSubscriptionMetadata() {
+  try {
+    const raw = localStorage.getItem(META_KEY)
+    if (!raw) return {}
+    const parsed = JSON.parse(raw)
+    return typeof parsed === 'object' && parsed !== null ? parsed : {}
+  } catch {
+    return {}
+  }
+}
+
+/**
+ * Persists client-side subscription metadata to localStorage.
+ */
+export function saveSubscriptionMetadata(meta) {
+  try {
+    localStorage.setItem(META_KEY, JSON.stringify(meta))
+  } catch (err) {
+    console.error('Failed to save subscription metadata to localStorage.', err)
+  }
+}
+
+/**
+ * Updates metadata for a single subscription ID.
+ */
+export function updateSingleSubscriptionMetadata(id, extraFields) {
+  const allMeta = loadSubscriptionMetadata()
+  allMeta[id] = {
+    ...(allMeta[id] || {}),
+    ...extraFields,
+  }
+  saveSubscriptionMetadata(allMeta)
+}
+
+/**
+ * Removes metadata for a deleted subscription ID.
+ */
+export function removeSingleSubscriptionMetadata(id) {
+  const allMeta = loadSubscriptionMetadata()
+  if (allMeta[id]) {
+    delete allMeta[id]
+    saveSubscriptionMetadata(allMeta)
   }
 }

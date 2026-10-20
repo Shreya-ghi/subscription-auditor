@@ -23,3 +23,26 @@ powershell.bat
 *.njsproj
 *.sln
 *.sw?
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local databases
+*.db
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+@'
+
+# Python test cache
+.pytest_cache/
+
+# Environment variables and secrets
+.env.*
+!.env.example
+'@ | Add-Content .gitignore

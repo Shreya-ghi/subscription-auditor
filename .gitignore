@@ -6,3 +6,5 @@ node_modules/
 dist/
 *.db
 powershell.bat
+
+.pytest_cache/

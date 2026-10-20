@@ -21,12 +21,20 @@ export function parseLocalDate(dateString) {
  * If billing cycle is yearly, monthly cost is price / 12.
  */
 export function calculateMonthlyCost(subscription) {
-  if (!subscription || subscription.price === undefined || subscription.price === null) return 0
-  const price = Number(subscription.price)
+  if (!subscription) return 0
+  const rawPrice = subscription.price !== undefined && subscription.price !== null
+    ? subscription.price
+    : subscription.amount
+  if (rawPrice === undefined || rawPrice === null) return 0
+  const price = Number(rawPrice)
   if (isNaN(price) || price < 0) return 0
 
-  if (subscription.billingCycle === 'yearly') {
+  const cycle = (subscription.billingCycle || subscription.billing_cycle || 'monthly').toLowerCase()
+  if (cycle === 'yearly') {
     return price / 12
+  }
+  if (cycle === 'quarterly') {
+    return price / 3
   }
   return price
 }
@@ -34,14 +42,23 @@ export function calculateMonthlyCost(subscription) {
 /**
  * Calculates normalized annual cost of a subscription.
  * If billing cycle is monthly, annual cost is price * 12.
+ * If billing cycle is quarterly, annual cost is price * 4.
  */
 export function calculateAnnualCost(subscription) {
-  if (!subscription || subscription.price === undefined || subscription.price === null) return 0
-  const price = Number(subscription.price)
+  if (!subscription) return 0
+  const rawPrice = subscription.price !== undefined && subscription.price !== null
+    ? subscription.price
+    : subscription.amount
+  if (rawPrice === undefined || rawPrice === null) return 0
+  const price = Number(rawPrice)
   if (isNaN(price) || price < 0) return 0
 
-  if (subscription.billingCycle === 'monthly') {
+  const cycle = (subscription.billingCycle || subscription.billing_cycle || 'monthly').toLowerCase()
+  if (cycle === 'monthly') {
     return price * 12
+  }
+  if (cycle === 'quarterly') {
+    return price * 4
   }
   return price
 }
@@ -162,10 +179,10 @@ export function getUpcomingRenewals(subscriptions = [], daysThreshold = 7) {
   return subscriptions
     .filter((s) => {
       if (s.status !== 'active') return false
-      const days = calculateDaysUntil(s.nextRenewalDate)
+      const days = calculateDaysUntil(s.nextRenewalDate || s.next_renewal)
       return days >= 0 && days <= daysThreshold
     })
-    .sort((a, b) => calculateDaysUntil(a.nextRenewalDate) - calculateDaysUntil(b.nextRenewalDate))
+    .sort((a, b) => calculateDaysUntil(a.nextRenewalDate || a.next_renewal) - calculateDaysUntil(b.nextRenewalDate || b.next_renewal))
 }
 
 /**

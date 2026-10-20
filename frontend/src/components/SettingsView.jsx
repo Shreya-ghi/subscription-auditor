@@ -105,12 +105,12 @@ export default function SettingsView({
       <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-5 space-y-4">
         <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
           <Database className="w-4 h-4 text-indigo-600" />
-          <h3 className="text-sm font-bold text-slate-900">Client-Side Data Management</h3>
+          <h3 className="text-sm font-bold text-slate-900">Backend & Data Management</h3>
         </div>
 
         <p className="text-xs text-slate-600">
-          All subscription records are currently stored locally in your browser’s localStorage.
-          You can backup your data to a JSON file or restore the default demo configuration at any time.
+          Subscription records are synchronized with the FastAPI &amp; SQLite database (<code>backend/subscriptions.db</code>).
+          You can backup your data to a JSON file, import records, or seed standard sample subscriptions at any time.
         </p>
 
         <div className="flex flex-wrap items-center gap-3 pt-2">

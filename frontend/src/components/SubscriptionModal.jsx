@@ -18,13 +18,14 @@ export default function SubscriptionModal({
   // Initialize form state
   const getInitialForm = () => {
     if (subscription) {
+      const priceVal = subscription.price !== undefined ? subscription.price : subscription.amount
       return {
         name: subscription.name || '',
         category: subscription.category || CATEGORIES[0],
-        price: subscription.price !== undefined ? String(subscription.price) : '',
+        price: priceVal !== undefined && priceVal !== null ? String(priceVal) : '',
         currency: subscription.currency || '$',
-        billingCycle: subscription.billingCycle || 'monthly',
-        nextRenewalDate: subscription.nextRenewalDate || '',
+        billingCycle: (subscription.billingCycle || subscription.billing_cycle || 'monthly').toLowerCase(),
+        nextRenewalDate: subscription.nextRenewalDate || subscription.next_renewal || '',
         status: subscription.status || 'active',
         usageFrequency: subscription.usageFrequency || 'daily',
         paymentMethod: subscription.paymentMethod || PAYMENT_METHODS[0],
@@ -94,7 +95,8 @@ export default function SubscriptionModal({
     const payload = {
       ...formData,
       price: priceNum,
-      id: subscription ? subscription.id : `sub-${Date.now()}`,
+      amount: priceNum,
+      id: subscription ? subscription.id : undefined,
     }
 
     onSave(payload)
