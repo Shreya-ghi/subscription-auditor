@@ -1,26 +1,54 @@
 # Smart Subscription & Recurring Expense Auditor
 
-A web application to track recurring subscriptions, calculate expenses, monitor upcoming renewals, and identify potential savings.
+## 1. Project Introduction
 
-## Technology Stack
-- Frontend: React + Vite
-- Backend: Python + FastAPI
-- Database: SQLite
-- Charts: Recharts
+The Smart Subscription & Recurring Expense Auditor is a web application
+that helps users manage recurring expenses and track subscription payments
+in one place.
 
-## Current Status
-- Frontend dashboard implemented.
-- Subscription data and preferences persist in browser localStorage.
-- Backend development is planned.
-- Git version control is configured.
+It helps users organize subscriptions, monitor recurring costs, and
+understand their spending more easily.
 
-## Setup
+## 2. Project Objectives
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+- Manage recurring subscriptions in one place.
+- Track subscription costs and billing details.
+- Monitor recurring expenses.
+- Provide a simple and user-friendly dashboard.
+- Use DevOps practices to test and build the application automatically.
 
-## Development
-Backend integration, automated tests, and DevOps pipeline setup will be documented as they are implemented and verified.
+## 3. Technologies Used
+
+### Frontend
+- React
+- Vite
+- Tailwind CSS
+- Recharts
+- Lucide React
+
+### Backend
+- Python
+- FastAPI
+- SQLAlchemy
+- SQLite
+
+### DevOps and Version Control
+- Git
+- GitHub
+- Jenkins
+- Pytest
+- npm
+
+## 4. Project Structure
+
+```text
+subscription-auditor/
+├── backend/
+│   ├── tests/
+│   └── application files
+├── frontend/
+│   ├── src/
+│   └── package.json
+├── Jenkinsfile
+├── README.md
+└── .gitignore
