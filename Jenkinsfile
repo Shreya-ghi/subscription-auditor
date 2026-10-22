@@ -23,6 +23,14 @@ pipeline {
             }
         }
 
+        stage('Frontend Tests') {
+            steps {
+                dir('frontend') {
+                    bat 'npm run test:run'
+                }
+            }
+        }
+
         stage('Frontend Build') {
             steps {
                 dir('frontend') {
