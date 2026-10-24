@@ -52,3 +52,124 @@ subscription-auditor/
 ├── Jenkinsfile
 ├── README.md
 └── .gitignore
+
+## 5. How to Run the Project Locally
+
+### Prerequisites
+- Python 3
+- Node.js and npm
+- Git
+
+### Backend Setup
+
+1. Open a terminal in the project root.
+2. Create and activate a Python virtual environment.
+3. Install the backend dependencies:
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+4. Configure the required environment variables, including `DATABASE_URL` and `ALLOWED_ORIGINS`, according to the backend configuration.
+5. Start the FastAPI server from the project root:
+
+```bash
+uvicorn app.main:app --reload --app-dir backend
+```
+
+6. Open the API documentation at `http://127.0.0.1:8000/docs`.
+
+### Frontend Setup
+
+1. Open a second terminal.
+2. Navigate to the frontend folder:
+
+```bash
+cd frontend
+npm install
+```
+
+3. Configure `VITE_API_BASE_URL` to point to the backend URL.
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+5. Open the local URL displayed in the terminal.
+
+## 6. Git and GitHub Workflow
+
+The project source code and version history are maintained using Git and GitHub.
+
+Repository: https://github.com/Shreya-ghi/subscription-auditor
+
+Common Git commands used:
+
+```bash
+git status
+git add .
+git commit -m "Describe the change"
+git push origin main
+git log --oneline
+```
+
+Meaningful changes are recorded as separate commits to maintain a clear development history.
+
+## 7. Website Deployment
+
+- Frontend: Vercel
+- Backend: Render
+- Database: Neon PostgreSQL
+
+Live website: https://subscription-auditor-eight.vercel.app
+
+Backend API documentation: https://subscription-auditor.onrender.com/docs
+
+## 8. DevOps Tool Integration — Jenkins
+
+Jenkins is integrated with the project to automate testing and frontend validation through a CI pipeline.
+
+The pipeline includes the following stages:
+
+1. Checkout source code from GitHub.
+2. Run backend tests using Pytest.
+3. Install frontend dependencies.
+4. Run frontend lint checks.
+5. Run frontend tests.
+6. Build the frontend production bundle.
+
+The pipeline helps identify errors early and verifies that the project can be built successfully after code changes.
+
+## 9. Changes Made and Commit History
+
+Document at least five meaningful changes made during development. For each change, include its description and the corresponding Git commit hash.
+
+| No. | Change description | Commit hash |
+|---|---|---|
+| 1 | Initial frontend implementation | Add verified commit hash |
+| 2 | Backend API integration | Add verified commit hash |
+| 3 | Jenkins CI pipeline setup | Add verified commit hash |
+| 4 | Frontend test integration | Add verified commit hash |
+| 5 | Deployment preparation | Add verified commit hash |
+
+Replace the placeholders with the actual commits from GitHub.
+
+## 10. Screenshot Evidence
+
+Add your own screenshots with short captions to demonstrate the project and its DevOps workflow.
+
+| Screenshot | Description |
+|---|---|
+| `evidence/dashboard.png` | Deployed website dashboard |
+| `evidence/subscriptions.png` | Subscription list and management |
+| `evidence/github-commits.png` | GitHub repository and commit history |
+| `evidence/jenkins-success.png` | Successful Jenkins pipeline |
+| `evidence/tests.png` | Backend and frontend test results |
+| `evidence/api-docs.png` | FastAPI Swagger documentation |
+
+Use screenshots captured from your own project. Ensure that the image paths match the actual files committed to the repository.
+
+## 11. Conclusion
+
+The Smart Subscription & Recurring Expense Auditor demonstrates website development, Git/GitHub version control, automated testing, Jenkins CI integration, and deployment of a frontend and backend application.
