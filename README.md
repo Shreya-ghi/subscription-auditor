@@ -143,17 +143,20 @@ The pipeline helps identify errors early and verifies that the project can be bu
 
 ## 9. Changes Made and Commit History
 
-Document at least five meaningful changes made during development. For each change, include its description and the corresponding Git commit hash.
+The project was developed incrementally using Git and GitHub. Each meaningful change was recorded as a separate commit.
 
-| No. | Change description | Commit hash |
+| No. | Change Description | Commit Hash |
 |---|---|---|
-| 1 | Initial frontend implementation | Add verified commit hash |
-| 2 | Backend API integration | Add verified commit hash |
-| 3 | Jenkins CI pipeline setup | Add verified commit hash |
-| 4 | Frontend test integration | Add verified commit hash |
-| 5 | Deployment preparation | Add verified commit hash |
+| 1 | Built and optimized the frontend | `b9af420` |
+| 2 | Integrated the subscription backend and API | `6b9e09a` |
+| 3 | Added the Jenkins CI pipeline | `c93e384` |
+| 4 | Configured the Python path for Jenkins | `1603d2b` |
+| 5 | Updated README and Jenkins CI documentation | `6a1abc8` |
+| 6 | Expanded frontend tests and integrated them into Jenkins CI | `c86442e` |
+| 7 | Prepared the application for deployment | `50d04fa` |
+| 8 | Expanded setup and deployment instructions in README | `29cb97c` |
 
-Replace the placeholders with the actual commits from GitHub.
+All commit hashes can be verified in the [GitHub commit history](https://github.com/Shreya-ghi/subscription-auditor/commits/main/).
 
 ## 10. Screenshot Evidence
 
