@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,11 +27,22 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Allowed frontend origins
-origins = [
+# Allowed frontend origins: default local development URLs
+default_origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+# Read optional comma-separated origins from ALLOWED_ORIGINS environment variable
+env_origins = os.getenv("ALLOWED_ORIGINS", "")
+custom_origins = [
+    origin.strip()
+    for origin in env_origins.split(",")
+    if origin.strip() and origin.strip() != "*"
+]
+
+# Combine and deduplicate origins without wildcards
+origins = list(dict.fromkeys(default_origins + custom_origins))
 
 # Configure CORS middleware to enable communication with the React frontend
 app.add_middleware(
